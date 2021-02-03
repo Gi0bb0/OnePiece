@@ -1,0 +1,126 @@
+﻿<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+    });
+
+    var angle = 0;
+    var setFermo = 0;
+    var numero = 0;
+    function vediImg(num) {
+        $(".personaggio").css("opacity", "0.5");
+        $("#scritta_" + num).hide("puff", 300);
+        $("#sinistro_" + num).hide("blind", { direction: "left" }, 1000);
+        $("#destro_" + num).hide("blind", { direction: "right" }, 1000);
+        $("#img_" + num).css("opacity", "1");
+        if (numero != num) {
+            angle = 0;
+            numero = num;
+        }
+        var rotazione = setInterval(function () {
+            $("#contorno_" + num)
+                .css('-webkit-transform', 'rotate(' + angle + 'deg)')
+                .css('-moz-transform', 'rotate(' + angle + 'deg)')
+                .css('-ms-transform', 'rotate(' + angle + 'deg)');
+            angle++; angle++; angle++;
+            if (setFermo == 1) {
+                clearInterval(rotazione);
+                setFermo = 0;
+            }
+        }, 50);
+    }
+    function nascondiImg(num) {
+        setFermo = 1;
+        $("#img_" + num).css("opacity", "0.5");
+        $("#sinistro_" + num).show("blind", { direction: "left" }, 500);
+        $("#destro_" + num).show("blind", { direction: "right" }, 500);
+        setTimeout(function () {
+            $("#scritta_" + num).show("puff", 100);
+        }, 505);
+    }
+</script>
+
+<style>
+    .contenitore {
+        overflow: hidden;
+        width: 300px;
+        height: 300px;
+        float: left;
+        position: relative;
+    }
+
+    .timone {
+        position: absolute;
+        height: 300px;
+        z-index: 100;
+        cursor: pointer;
+    }
+
+    .scritta {
+        font-family: Pirate;
+        font-size: 8vh;
+        color: antiquewhite;
+        position: absolute;
+        z-index: 98;
+        left: 50%;
+        top: 50%;
+    }
+
+    .sinistro {
+        height: 190px;
+        position: absolute;
+        left: 56px;
+        top: 58px;
+        z-index: 95;
+    }
+
+    .destro {
+        height: 190px;
+        position: absolute;
+        left: 139px;
+        top: 58px;
+        z-index: 95;
+    }
+
+    .personaggio {
+        height: 150px;
+        position: absolute;
+        left: 75px;
+        top: 70px;
+        opacity: 0.5;
+        z-index: 90;
+    }
+</style>
+
+<div class="contenitore">
+    <span id="scritta_1" class="scritta" style="font-size: 8vh; margin-left: -61px; margin-top: -58px;">Rufy</span>
+    <img id="contorno_1" class="timone" src="~/Images/contorno.png" onmouseover="vediImg(1)" onmouseout="nascondiImg(1)" />
+    <img id="sinistro_1" class="sinistro" src="~/Images/sinistro.png" />
+    <img id="destro_1" class="destro" src="~/Images/destro.png" />
+    <img id="img_1" class="personaggio" src="~/Images/rufy.png" />
+</div>
+
+<div class="contenitore">
+    <span id="scritta_2" class="scritta" style="font-size: 8vh; margin-left: -59px; margin-top: -58px;">Zoro</span>
+    <img id="contorno_2" class="timone" src="~/Images/contorno.png" onmouseover="vediImg(2)" onmouseout="nascondiImg(2)" />
+    <img id="sinistro_2" class="sinistro" src="~/Images/sinistro.png" />
+    <img id="destro_2" class="destro" src="~/Images/destro.png" />
+    <img id="img_2" class="personaggio" src="~/Images/zoro.png" />
+</div>
+
+<div class="contenitore">
+    <span id="scritta_3" class="scritta" style="font-size: 8vh; margin-left: -65px; margin-top: -58px;">Nami</span>
+    <img id="contorno_3" class="timone" src="~/Images/contorno.png" onmouseover="vediImg(3)" onmouseout="nascondiImg(3)" />
+    <img id="sinistro_3" class="sinistro" src="~/Images/sinistro.png" />
+    <img id="destro_3" class="destro" src="~/Images/destro.png" />
+    <img id="img_3" class="personaggio" src="~/Images/nami.png" style="height: 217px; top: 45px; left: 48px;" />
+</div>
+
+<div class="contenitore">
+    <span id="scritta_4" class="scritta" style="font-size: 7.5vh; margin-left: -68px; margin-top: -52px;">Usopp</span>
+    <img id="contorno_4" class="timone" src="~/Images/contorno.png" onmouseover="vediImg(4)" onmouseout="nascondiImg(4)" />
+    <img id="sinistro_4" class="sinistro" src="~/Images/sinistro.png" />
+    <img id="destro_4" class="destro" src="~/Images/destro.png" />
+    <img id="img_4" class="personaggio" src="~/Images/rufy.png" />
+</div>
