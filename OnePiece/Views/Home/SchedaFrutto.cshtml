@@ -1,15 +1,13 @@
 ﻿<script>
     $(document).ready(function () {
-        $("#schedaTre").show("bounce", { direction: "down" }, 1500);
+        var numero = "@ViewBag.Numero";
+        if (numero == "uno" || numero == "tre") {
+            $("#chiudi_" + numero).css("left", "10px");
+        } else {
+            $("#chiudi_" + numero).css("right", "10px");
+        }
+        $("#scheda" + numero).show("bounce", 1500);
     });
-
-    function nascondiSchedaFrutto() {
-        $("#schedaTre").hide("slide", { direction: "left" }, 800);
-    }
-
-    function flippaFrutto() {
-        $(".flipFrutto .card").toggleClass('is-flipped');
-    }
 </script>
 
 <style>
@@ -21,7 +19,7 @@
         margin-top: 2.5vh;
     }
 
-        .flipFrutto .card.is-flipped {
+        .is-flipped {
             -webkit-transform: rotateY(-180deg);
             transform: rotateY(180deg);
         }
@@ -78,20 +76,19 @@
     .chiudiSchedaFrutto {
         position: absolute;
         top: 0;
-        right: 10px;
         cursor: pointer;
     }
 </style>
 
-<div class="chiudiSchedaFrutto">
-    <i class="fa fa-times" style="font-size: 2.5vh;" onclick="nascondiSchedaFrutto()"></i>
+<div id="chiudi_@ViewBag.Numero" class="chiudiSchedaFrutto">
+    <i class="fa fa-times" style="font-size: 2.5vh;" onclick="nascondiScheda('@ViewBag.Numero')"></i>
 </div>
 
-<div class="flipFrutto" onclick="flippaFrutto()">
-    <div class="card">
+<div class="flipFrutto" onclick="flippaScheda('@ViewBag.Numero')">
+    <div id="card_@ViewBag.Numero" class="card">
         <div class="face front">
             <div class="inner">
-                <img src="~/Images/rogia.png" style="height: 15vh; width: 15vh;" />
+                <img src="~/Images/@ViewBag.Tipo" style="height: 15vh; width: 15vh;" />
                 <div style="width: 100%; font-size: 4vh; font-family: Pirate; text-align: center;">Foco Foco</div>
                 <div style="width: 100%; font-size: 1.2vh; text-align: center; font-weight: bold;">
                     <img src="~/Images/frutto.png" style="height: 2.5vh; width: 2.5vh; margin-top: -10px;" />

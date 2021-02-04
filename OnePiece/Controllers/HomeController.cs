@@ -15,12 +15,26 @@ namespace OnePiece.Controllers
 
         public PartialViewResult SchedaPersonaggio(string numero)
         {
+            List<string> tipi = new List<string>();
+            tipi.Add("rufy.png");
+            tipi.Add("zoro.png");
+            tipi.Add("sanji.png");
+            var random = new Random();
+            int index = random.Next(tipi.Count);
+            ViewBag.Tipo = tipi[index];
             ViewBag.Numero = numero;
             return PartialView();
         }
 
         public PartialViewResult SchedaFrutto(string numero)
         {
+            List<string> tipi = new List<string>();
+            tipi.Add("rogia.png");
+            tipi.Add("paramisha.png");
+            tipi.Add("zoozoo.png");
+            var random = new Random();
+            int index = random.Next(tipi.Count);
+            ViewBag.Tipo = tipi[index];
             ViewBag.Numero = numero;
             return PartialView();
         }
