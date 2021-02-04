@@ -13,12 +13,29 @@ namespace OnePiece.Controllers
             return View();
         }
 
+        public PartialViewResult SchedaPersonaggio(string numero)
+        {
+            ViewBag.Numero = numero;
+            return PartialView();
+        }
+
+        public PartialViewResult SchedaFrutto(string numero)
+        {
+            ViewBag.Numero = numero;
+            return PartialView();
+        }
+
         public ActionResult Carosello()
         {
             return View();
         }
 
         public ActionResult Timone()
+        {
+            return View();
+        }
+
+        public ActionResult Test()
         {
             return View();
         }

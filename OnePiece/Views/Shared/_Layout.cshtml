@@ -17,12 +17,43 @@
         <img src="~/Images/icona.png" style="height: 7vh; margin-top: 1vh; margin-left: 2vh; cursor: pointer; display: block; float: left;" onclick="home()" />
     </div>
 
-    <div class="contenitore" style="position: fixed; width: 100vw; top: 0; z-index: 100; text-align: center; font-weight: bold; font-size: 4vh; line-height: 9vh;">
+    <div class="contenitore" style="position: fixed; width: 100vw; top: 0; z-index: 100; text-align: center; font-weight: bold; font-size: 6vh; line-height: 9vh; font-family: Pirate;">
         Saga di Romance Dawn
+    </div>
+
+    @*SCHEDE DI SINISTRA*@
+    <div id="schedauno" class="contenitore" style="position: fixed; width: 30vh; top: 12vh; left: 2vh; z-index: 100; text-align: center; font-weight: bold; display: none;">
+
+    </div>
+    <div id="schedatre" class="contenitore" style="position: fixed; width: 30vh; bottom: 10vh; left: 2vh; z-index: 100; text-align: center; font-weight: bold; display: none;">
+
+    </div>
+
+    @*SCHEDE DI DESTRA*@
+    <div id="schedadue" class="contenitore" style="position: fixed; width: 30vh; top: 12vh; right: 2vh; z-index: 100; text-align: center; font-weight: bold; display: none;">
+
+    </div>
+    <div id="schedaquattro" class="contenitore" style="position: fixed; width: 30vh; bottom: 10vh; right: 2vh; z-index: 100; text-align: center; font-weight: bold; display: none;">
+
     </div>
 
     <div class="container body-content">
         @RenderBody()
+    </div>
+
+    <div class="contenitore" style="position: fixed; bottom: 0; z-index: 101; height: 5vh; width: 100vw;">
+        <div class="contenitore col-lg-4" style="padding: 0;">
+            <div id="freccia_uno" class="frecciaTrasparente frecciaSu"></div>
+            <div id="capitolo_uno" class="capitolo capitoloScelto" onclick="vaiA('uno')">Capitolo 1</div>
+        </div>
+        <div class="contenitore col-lg-4" style="padding: 0;">
+            <div id="freccia_due" class="frecciaTrasparente"></div>
+            <div id="capitolo_due" class="capitolo" onclick="vaiA('due')">Capitolo 2</div>
+        </div>
+        <div class="contenitore col-lg-4" style="padding: 0;">
+            <div id="freccia_tre" class="frecciaTrasparente"></div>
+            <div id="capitolo_tre" class="capitolo" onclick="vaiA('tre')">Capitolo 3</div>
+        </div>
     </div>
 </body>
 </html>

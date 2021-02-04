@@ -131,6 +131,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\scorrimento.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -174,18 +176,30 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\QuigleyWiggly.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\frutto.png" />
     <Content Include="Images\icona.png" />
+    <Content Include="Images\paramisha.png" />
+    <Content Include="Images\pirata.png" />
+    <Content Include="Images\rogia.png" />
+    <Content Include="Images\rufy.png" />
     <Content Include="Images\sfondo.png" />
+    <Content Include="Images\zoozoo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\QuigleyWiggly.ttf" />
     <Content Include="fonts\QuigleyWiggly.eot" />
     <Content Include="fonts\QuigleyWiggly.woff" />
     <Content Include="fonts\QuigleyWiggly.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -213,6 +227,9 @@
     <Content Include="Views\Home\Timone.cshtml" />
     <Content Include="Views\Home\Carosello.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Home\SchedaPersonaggio.cshtml" />
+    <Content Include="Views\Home\SchedaFrutto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

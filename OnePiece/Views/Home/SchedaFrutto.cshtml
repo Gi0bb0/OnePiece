@@ -1,0 +1,109 @@
+﻿<script>
+    $(document).ready(function () {
+        $("#schedaTre").show("bounce", { direction: "down" }, 1500);
+    });
+
+    function nascondiSchedaFrutto() {
+        $("#schedaTre").hide("slide", { direction: "left" }, 800);
+    }
+
+    function flippaFrutto() {
+        $(".flipFrutto .card").toggleClass('is-flipped');
+    }
+</script>
+
+<style>
+    .flipFrutto {
+        -webkit-perspective: initial;
+        perspective: initial;
+        position: relative;
+        text-align: center;
+        margin-top: 2.5vh;
+    }
+
+        .flipFrutto .card.is-flipped {
+            -webkit-transform: rotateY(-180deg);
+            transform: rotateY(180deg);
+        }
+
+
+        .flipFrutto .card {
+            width: 29vh;
+            height: 35vh;
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition: 0.5s;
+            transform-style: preserve-3d;
+            transition: 0.5s;
+            background-color: #fff;
+            border-radius: 0.5vh;
+            border: 3px solid purple;
+        }
+
+            .flipFrutto .card .face {
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                z-index: 2;
+            }
+
+            .flipFrutto .card .front {
+                position: absolute;
+                width: 100%;
+                z-index: 1;
+            }
+
+                .flipFrutto .card .front img {
+                    width: 29vh;
+                    height: 100%;
+                }
+
+            .flipFrutto .card .img {
+                position: relative;
+                width: 29vh;
+                height: 35vh;
+                z-index: 1;
+                border: 2px solid #000;
+            }
+
+            .flipFrutto .card .back {
+                -webkit-transform: rotateY(-180deg);
+                transform: rotateY(-180deg);
+                position: absolute;
+            }
+
+    flipFrutto .inner {
+        margin: 0px !important;
+        width: 100%;
+    }
+
+    .chiudiSchedaFrutto {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="chiudiSchedaFrutto">
+    <i class="fa fa-times" style="font-size: 2.5vh;" onclick="nascondiSchedaFrutto()"></i>
+</div>
+
+<div class="flipFrutto" onclick="flippaFrutto()">
+    <div class="card">
+        <div class="face front">
+            <div class="inner">
+                <img src="~/Images/rogia.png" style="height: 15vh; width: 15vh;" />
+                <div style="width: 100%; font-size: 4vh; font-family: Pirate; text-align: center;">Foco Foco</div>
+                <div style="width: 100%; font-size: 1.2vh; text-align: center; font-weight: bold;">
+                    <img src="~/Images/frutto.png" style="height: 2.5vh; width: 2.5vh; margin-top: -10px;" />
+                    <span style="padding-left: 3px;">FRUTTO DEL DIAVOLO</span>
+                </div>
+                @*<div style="width: 100%; font-size: 1.7vh; text-align: center;">Tipo: ROGIA</div>*@
+            </div>
+        </div>
+        <div class="face back">
+            <div class="inner">
+                Retro card
+            </div>
+        </div>
+    </div>
+</div>
