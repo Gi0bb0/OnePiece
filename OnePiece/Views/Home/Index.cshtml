@@ -1,14 +1,12 @@
 ﻿<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
 
 <script>
-
-    var schedaUno = false;
-    var schedaDue = false;
-    var schedaTre = false;
-    var schedaQuattro = false;
-    var ordineApparizione = [];
+    $(document).ready(function () {
+        $("#contenitoreMenuFooter").load("../Home/MenuSaghe?sagaID=" + 1);
+    });
 
     function mostraScheda(tipo) {
+        nascondiMenu();
         var numero = "";
         if (!schedaUno) {
             numero = "uno";
@@ -27,10 +25,9 @@
             schedaQuattro = true;
             ordineApparizione.push(4);
         }
-        console.log(numero);
         if (numero != "") {
             $("#scheda" + numero).hide();
-            $("#scheda" + numero).load("../Home/Scheda" + tipo  + "?numero=" + numero);
+            $("#scheda" + numero).load("../Home/Scheda" + tipo + "?numero=" + numero);
         } else {
             var apparsoPrima = ordineApparizione[0];
             ordineApparizione.shift();
@@ -92,14 +89,16 @@
         $("#card_" + numero).toggleClass('is-flipped');
     }
 
-    function vaiA(id) {
-        $("html, body").animate({ scrollTop: $('#contenitore_' + id).offset().top }, 1000);
-        $(".testo").hide();
-        $(".capitoloScelto").removeClass("capitoloScelto");
-        $(".frecciaSu").removeClass("frecciaSu");
-        $("#testo_" + id).show();
-        $("#capitolo_" + id).addClass("capitoloScelto");
-        $("#freccia_" + id).addClass("frecciaSu");
+    function navigaCapitolo(index) {
+        $("html, body").animate({ scrollTop: $('#contenitore_' + index).offset().top }, 1000);
+        $(".frecciaGiuCapitolo").hide();
+        $(".frecciaSuCapitolo").hide();
+        $("#frecciaPrev_" + index).show();
+        $("#frecciaNext_" + index).show();
+    }
+
+    function caricaSaga(sagaID) {
+
     }
 </script>
 
@@ -112,7 +111,7 @@
         height: 100vh;
     }
 
-        .romanceDawn::after {
+        /*.romanceDawn::after {
             content: "";
             background: url(../Images/sfondo.png);
             opacity: 0.1;
@@ -122,7 +121,7 @@
             right: 0;
             position: absolute;
             z-index: -1;
-        }
+        }*/
 
         .romanceDawn p {
             text-align: center;
@@ -130,8 +129,9 @@
             color: #8b8b8b;
             z-index: 2;
             padding: 0 40vh;
-            margin: 9vh 0 0 0;
-            -webkit-backface-visibility: hidden;
+            margin: 18.5vh 0 0 0;
+            max-height: 64vh;
+            overflow: hidden;
         }
 
     .personaggio {
@@ -174,59 +174,98 @@
         transition: 0.5s;
     }
 
-    .frutto a {
-        color: purple;
-        text-decoration: none;
-        display: inline-block;
-        padding: 2px 2px;
-        position: relative;
+        .frutto a {
+            color: purple;
+            text-decoration: none;
+            display: inline-block;
+            padding: 2px 2px;
+            position: relative;
+        }
+
+            .frutto a:after {
+                background: none repeat scroll 0 0 transparent;
+                bottom: 0;
+                content: "";
+                display: block;
+                height: 4px;
+                left: 50%;
+                position: absolute;
+                background: purple;
+                transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                width: 0;
+            }
+
+            .frutto a:hover:after {
+                width: 100%;
+                left: 0;
+            }
+
+    .frecciaSuCapitolo {
+        position: fixed;
+        top: 9vh;
+        z-index: 98;
+        width: 100%;
+        font-size: 6vh;
+        text-align: center;
+        color: darkred;
+        display: none;
     }
 
-        .frutto a:after {
-            background: none repeat scroll 0 0 transparent;
-            bottom: 0;
-            content: "";
-            display: block;
-            height: 4px;
-            left: 50%;
-            position: absolute;
-            background: purple;
-            transition: width 0.3s ease 0s, left 0.3s ease 0s;
-            width: 0;
-        }
+    .frecciaGiuCapitolo {
+        position: fixed;
+        bottom: 8vh;
+        z-index: 98;
+        width: 100%;
+        font-size: 6vh;
+        text-align: center;
+        color: darkred;
+    }
 
-        .frutto a:hover:after {
-            width: 100%;
-            left: 0;
-        }
+    #sfondo {
+        background: url(../Images/sfondo.png);
+        opacity: 0.1;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: fixed;
+        z-index: -1;
+    }
 </style>
 
 <div id="sfondo"></div>
 
-<div id="contenitore_uno" class="romanceDawn">
-    <p id="testo_uno" class="testo">
-        <span class="personaggio"><a onclick="mostraScheda('Personaggio')">Lorem</a></span> ipsum dolor sit amet, consectetur adipiscing elit <span class="frutto"><a onclick="mostraScheda('Frutto')">Lorem</a></span>. Morbi aliquam est vitae nisl feugiat, vel tempor mauris placerat. Donec interdum sodales lacus, sed accumsan arcu ultrices porttitor. Donec dictum arcu neque, nec ultrices dolor auctor eget. Donec ut lorem eu nulla aliquet rhoncus. Morbi non nisl ligula. Pellentesque aliquet lectus a risus tempor, eget ornare nibh accumsan. Quisque non sem dignissim, auctor tellus ac, iaculis purus. Fusce congue dolor ipsum, at cursus leo auctor eu. Vivamus dolor odio, imperdiet id enim sit amet, scelerisque fermentum arcu. Duis tincidunt ultrices urna egestas efficitur. Vivamus egestas enim lorem, non cursus lacus fermentum et. Nulla ac augue at neque imperdiet egestas et pellentesque augue.
-        Sed quam magna, egestas quis mauris a, suscipit efficitur est. Donec eget dignissim urna, ut lacinia enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas consequat enim non venenatis pulvinar. Ut tellus nisi, venenatis vitae lorem eget, lobortis euismod turpis. Pellentesque aliquet maximus orci, non auctor metus. Curabitur scelerisque massa a justo rhoncus ultricies. Suspendisse vitae mauris egestas, tempus libero et, lacinia odio. Curabitur consequat malesuada faucibus. Suspendisse congue hendrerit neque eget porttitor. Mauris bibendum erat in tortor ornare viverra. Donec eget sodales erat. Duis semper vehicula massa sit amet condimentum. Nam tincidunt, dui eu facilisis consequat, leo nisi malesuada odio, ac vestibulum enim risus iaculis nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-        Quisque vulputate, felis non dapibus elementum, mauris <span class="frutto"><a onclick="mostraScheda('Frutto')">Lorem</a></span> bibendum felis, et mattis nunc tortor vitae velit. Maecenas auctor justo vitae ultrices malesuada. Nam in mi ullamcorper, vestibulum nunc ut, sagittis purus. Etiam viverra id lectus quis mattis. Pellentesque lectus odio, sollicitudin et venenatis ultricies, auctor ac neque. Praesent suscipit turpis rhoncus nulla semper pretium. Maecenas sit amet arcu a ante iaculis aliquet. Aliquam in sodales mauris, at malesuada quam.
-        Cras imperdiet tellus vitae tellus pellentesque, in convallis tellus volutpat. Nullam interdum <span class="personaggio"><a onclick="mostraScheda('Personaggio')">Lorem</a></span> massa nec aliquet. Praesent et placerat nulla, at ullamcorper massa. Vivamus felis est, commodo quis bibendum nec, laoreet sit amet nisi. Fusce vel metus orci. Etiam interdum sem porttitor, consectetur quam quis, dignissim lacus. Cras et nibh massa. Aenean quis felis eu justo blandit efficitur. Nullam mi sem, sollicitudin at ornare nec, molestie sit amet velit. Pellentesque porta sem ut dui lobortis viverra vitae vel ipsum. Maecenas cursus turpis odio, in posuere ipsum rutrum eget. Fusce id ante ultricies, feugiat nisi at, euismod dolor. Phasellus dapibus mi eget ante aliquet commodo.
-        Praesent non libero ut ante pharetra pharetra. Proin lobortis placerat sagittis. Nunc lobortis sodales aliquam. Etiam pulvinar nibh diam, porta ultrices nibh convallis sed. Nunc nisi odio, posuere et magna at, dignissim ultrices elit. In egestas ut urna elementum egestas. Mauris turpis nunc, faucibus sit amet euismod ac, consequat sit amet sapien. Maecenas lobortis mi eget justo ullamcorper pharetra. Integer fringilla metus imperdiet ullamcorper laoreet. Donec efficitur congue odio, in rhoncus leo facilisis eget. Curabitur efficitur justo eget est vulputate, sit amet facilisis libero hendrerit. Nulla dapibus ligula in faucibus bibendum. Ut id mauris orci. Praesent vulputate, mi ut faucibus convallis, dui mauris sollicitudin dui, eget auctor sem erat ac diam. Sed sed sem convallis, ultricies magna quis, eleifend orci. Mauris laoreet ultrices purus.
-    </p>
-</div>
-<div id="contenitore_due" class="romanceDawn">
-    <p id="testo_due" class="testo" style="display: none;">
-        ipsum dolor sit amet, consectetur adipiscing elit <span class="personaggio"><a href="#">Lorem</a></span>. Morbi aliquam est vitae nisl feugiat, vel tempor mauris placerat. Donec interdum sodales lacus, sed accumsan arcu ultrices porttitor. Donec dictum arcu neque, nec ultrices dolor auctor eget. Donec ut lorem eu nulla aliquet rhoncus. Morbi non nisl ligula. Pellentesque aliquet lectus a risus tempor, eget ornare nibh accumsan. Quisque non sem dignissim, auctor tellus ac, iaculis purus. Fusce congue dolor ipsum, at cursus leo auctor eu. Vivamus dolor odio, imperdiet id enim sit amet, scelerisque fermentum arcu. Duis tincidunt ultrices urna egestas efficitur. Vivamus egestas enim lorem, non cursus lacus fermentum et. Nulla ac augue at neque imperdiet egestas et pellentesque augue.
-        Sed quam magna, egestas quis mauris a, suscipit efficitur est. Donec eget dignissim urna, ut lacinia enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas consequat enim non venenatis pulvinar. Ut tellus nisi, venenatis vitae lorem eget, lobortis euismod turpis. Pellentesque aliquet maximus orci, non auctor metus. Curabitur scelerisque massa a justo rhoncus ultricies. Suspendisse vitae mauris egestas, tempus libero et, lacinia odio. Curabitur consequat malesuada faucibus. Suspendisse congue hendrerit neque eget porttitor. Mauris bibendum erat in tortor ornare viverra. Donec eget sodales erat. Duis semper vehicula massa sit amet condimentum. Nam tincidunt, dui eu facilisis consequat, leo nisi malesuada odio, ac vestibulum enim risus iaculis nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-        Quisque vulputate, felis non dapibus elementum, mauris purus bibendum felis, et mattis nunc tortor vitae velit. Maecenas auctor justo vitae ultrices malesuada. Nam in mi ullamcorper, vestibulum nunc ut, sagittis purus. Etiam viverra id lectus quis mattis. Pellentesque lectus odio, sollicitudin et venenatis ultricies, auctor ac neque. Praesent suscipit turpis rhoncus nulla semper pretium. Maecenas sit amet arcu a ante iaculis aliquet. Aliquam in sodales mauris, at malesuada quam.
-        Cras imperdiet tellus vitae tellus pellentesque, in convallis tellus volutpat. Nullam interdum venenatis massa nec aliquet. Praesent et placerat nulla, at ullamcorper massa. Vivamus felis est, commodo quis bibendum nec, laoreet sit amet nisi. Fusce vel metus orci. Etiam interdum sem porttitor, consectetur quam quis, dignissim lacus. Cras et nibh massa. Aenean quis felis eu justo blandit efficitur. Nullam mi sem, sollicitudin at ornare nec, molestie sit amet velit. Pellentesque porta sem ut dui lobortis viverra vitae vel ipsum. Maecenas cursus turpis odio, in posuere ipsum rutrum eget. Fusce id ante ultricies, feugiat nisi at, euismod dolor. Phasellus dapibus mi eget ante aliquet commodo.
-        Praesent non libero ut ante pharetra pharetra. Proin lobortis placerat sagittis. Nunc lobortis sodales aliquam. Etiam pulvinar nibh diam, porta ultrices nibh convallis sed. Nunc nisi odio, posuere et magna at, dignissim ultrices elit. In egestas ut urna elementum egestas. Mauris turpis nunc, faucibus sit amet euismod ac, consequat sit amet sapien. Maecenas lobortis mi eget justo ullamcorper pharetra. Integer fringilla metus imperdiet ullamcorper laoreet. Donec efficitur congue odio, in rhoncus leo facilisis eget. Curabitur efficitur justo eget est vulputate, sit amet facilisis libero hendrerit. Nulla dapibus ligula in faucibus bibendum. Ut id mauris orci. Praesent vulputate, mi ut faucibus convallis, dui mauris sollicitudin dui, eget auctor sem erat ac diam. Sed sed sem convallis, ultricies magna quis, eleifend orci. Mauris laoreet ultrices purus.
-    </p>
-</div>
-<div id="contenitore_tre" class="romanceDawn">
-    <p id="testo_tre" class="testo" style="display: none;">
-        ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam est vitae nisl feugiat, vel tempor mauris placerat. <span class="personaggio"><a href="#">Lorem</a></span> Donec interdum sodales lacus, sed accumsan arcu ultrices porttitor. Donec dictum arcu neque, nec ultrices dolor auctor eget. Donec ut lorem eu nulla aliquet rhoncus. Morbi non nisl ligula. Pellentesque aliquet lectus a risus tempor, eget ornare nibh accumsan. Quisque non sem dignissim, auctor tellus ac, iaculis purus. Fusce congue dolor ipsum, at cursus leo auctor eu. Vivamus dolor odio, imperdiet id enim sit amet, scelerisque fermentum arcu. Duis tincidunt ultrices urna egestas efficitur. Vivamus egestas enim lorem, non cursus lacus fermentum et. Nulla ac augue at neque imperdiet egestas et pellentesque augue.
-        Sed quam magna, egestas quis mauris a, suscipit efficitur est. Donec eget dignissim urna, ut lacinia enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas consequat enim non venenatis pulvinar. Ut tellus nisi, venenatis vitae lorem eget, lobortis euismod turpis. Pellentesque aliquet maximus orci, non auctor metus. Curabitur scelerisque massa a justo rhoncus ultricies. Suspendisse vitae mauris egestas, tempus libero et, lacinia odio. Curabitur consequat malesuada faucibus. Suspendisse congue hendrerit neque eget porttitor. Mauris bibendum erat in tortor ornare viverra. Donec eget sodales erat. Duis semper vehicula massa sit amet condimentum. Nam tincidunt, dui eu facilisis consequat, leo nisi malesuada odio, ac vestibulum enim risus iaculis nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-        Quisque vulputate, felis non dapibus elementum, mauris purus bibendum felis, et mattis nunc tortor vitae velit. Maecenas auctor justo vitae ultrices malesuada. Nam in mi ullamcorper, vestibulum nunc ut, sagittis purus. Etiam viverra id lectus quis mattis. Pellentesque lectus odio, sollicitudin et venenatis ultricies, auctor ac neque. Praesent suscipit turpis rhoncus nulla semper pretium. Maecenas sit amet arcu a ante iaculis aliquet. Aliquam in sodales mauris, at malesuada quam.
-        Cras imperdiet tellus vitae tellus pellentesque, in convallis tellus volutpat. Nullam interdum venenatis massa nec aliquet. Praesent et placerat nulla, at ullamcorper massa. Vivamus felis est, commodo quis bibendum nec, laoreet sit amet nisi. Fusce vel metus orci. Etiam interdum sem porttitor, consectetur quam quis, dignissim lacus. Cras et nibh massa. Aenean quis felis eu justo blandit efficitur. Nullam mi sem, sollicitudin at ornare nec, molestie sit amet velit. Pellentesque porta sem ut dui lobortis viverra vitae vel ipsum. Maecenas cursus turpis odio, in posuere ipsum rutrum eget. Fusce id ante ultricies, feugiat nisi at, euismod dolor. Phasellus dapibus mi eget ante aliquet commodo.
-        Praesent non libero ut ante pharetra pharetra. Proin lobortis placerat sagittis. Nunc lobortis sodales aliquam. Etiam pulvinar nibh diam, porta ultrices nibh convallis sed. Nunc nisi odio, posuere et magna at, dignissim ultrices elit. In egestas ut urna elementum egestas. Mauris turpis nunc, faucibus sit amet euismod ac, consequat sit amet sapien. Maecenas lobortis mi eget justo ullamcorper pharetra. Integer fringilla metus imperdiet ullamcorper laoreet. Donec efficitur congue odio, in rhoncus leo facilisis eget. Curabitur efficitur justo eget est vulputate, sit amet facilisis libero hendrerit. Nulla dapibus ligula in faucibus bibendum. Ut id mauris orci. Praesent vulputate, mi ut faucibus convallis, dui mauris sollicitudin dui, eget auctor sem erat ac diam. Sed sed sem convallis, ultricies magna quis, eleifend orci. Mauris laoreet ultrices purus.
-    </p>
-</div>
+@for (int i = 0; i < 3; i++)
+{
+    int prev = i - 1;
+    int next = i + 1;
+    string display = "none";
+    if (i == 0)
+    {
+        display = "block";
+    }
+
+    if (i > 0)
+    {
+        <div id="frecciaPrev_@i" class="frecciaSuCapitolo">
+            <i class="fa fa-chevron-up" onclick="navigaCapitolo(@prev)"></i>
+        </div>
+    }
+
+    <div id="contenitore_@i" class="romanceDawn">
+        <p id="testo_@i" class="testo">
+            <span class="personaggio"><a onclick="mostraScheda('Personaggio')">Lorem</a></span> ipsum dolor sit amet, consectetur adipiscing elit <span class="frutto"><a onclick="mostraScheda('Frutto')">Lorem</a></span>. Morbi aliquam est vitae nisl feugiat, vel tempor mauris placerat. Donec interdum sodales lacus, sed accumsan arcu ultrices porttitor. Donec dictum arcu neque, nec ultrices dolor auctor eget. Donec ut lorem eu nulla aliquet rhoncus. Morbi non nisl ligula. Pellentesque aliquet lectus a risus tempor, eget ornare nibh accumsan. Quisque non sem dignissim, auctor tellus ac, iaculis purus. Fusce congue dolor ipsum, at cursus leo auctor eu. Vivamus dolor odio, imperdiet id enim sit amet, scelerisque fermentum arcu. Duis tincidunt ultrices urna egestas efficitur. Vivamus egestas enim lorem, non cursus lacus fermentum et. Nulla ac augue at neque imperdiet egestas et pellentesque augue.
+            Sed quam magna, egestas quis mauris a, suscipit efficitur est. Donec eget dignissim urna, ut lacinia enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas consequat enim non venenatis pulvinar. Ut tellus nisi, venenatis vitae lorem eget, lobortis euismod turpis. Pellentesque aliquet maximus orci, non auctor metus. Curabitur scelerisque massa a justo rhoncus ultricies. Suspendisse vitae mauris egestas, tempus libero et, lacinia odio. Curabitur consequat malesuada faucibus. Suspendisse congue hendrerit neque eget porttitor. Mauris bibendum erat in tortor ornare viverra. Donec eget sodales erat. Duis semper vehicula massa sit amet condimentum. Nam tincidunt, dui eu facilisis consequat, leo nisi malesuada odio, ac vestibulum enim risus iaculis nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+            Quisque vulputate, felis non dapibus elementum, mauris <span class="frutto"><a onclick="mostraScheda('Frutto')">Lorem</a></span> bibendum felis, et mattis nunc tortor vitae velit. Maecenas auctor justo vitae ultrices malesuada. Nam in mi ullamcorper, vestibulum nunc ut, sagittis purus. Etiam viverra id lectus quis mattis. Pellentesque lectus odio, sollicitudin et venenatis ultricies, auctor ac neque. Praesent suscipit turpis rhoncus nulla semper pretium. Maecenas sit amet arcu a ante iaculis aliquet. Aliquam in sodales mauris, at malesuada quam.
+            Cras imperdiet tellus vitae tellus pellentesque, in convallis tellus volutpat. Nullam interdum <span class="personaggio"><a onclick="mostraScheda('Personaggio')">Lorem</a></span> massa nec aliquet. Praesent et placerat nulla, at ullamcorper massa. Vivamus felis est, commodo quis bibendum nec, laoreet sit amet nisi. Fusce vel metus orci. Etiam interdum sem porttitor, consectetur quam quis, dignissim lacus. Cras et nibh massa. Aenean quis felis eu justo blandit efficitur. Nullam mi sem, sollicitudin at ornare nec, molestie sit amet velit. Pellentesque porta sem ut dui lobortis viverra vitae vel ipsum. Maecenas cursus turpis odio, in posuere ipsum rutrum eget. Fusce id ante ultricies, feugiat nisi at, euismod dolor. Phasellus dapibus mi eget ante aliquet commodo.
+            Praesent non libero ut ante pharetra pharetra. Proin lobortis placerat sagittis. Nunc lobortis sodales aliquam. Etiam pulvinar nibh diam, porta ultrices nibh convallis sed. Nunc nisi odio, posuere et magna at, dignissim ultrices elit. In egestas ut urna elementum egestas. Mauris turpis nunc, faucibus sit amet euismod ac, consequat sit amet sapien. Maecenas lobortis mi eget justo ullamcorper pharetra. Integer fringilla metus imperdiet ullamcorper laoreet. Donec efficitur congue odio, in rhoncus leo facilisis eget. Curabitur efficitur justo eget est vulputate, sit amet facilisis libero hendrerit. Nulla dapibus ligula in faucibus bibendum. Ut id mauris orci. Praesent vulputate, mi ut faucibus convallis, dui mauris sollicitudin dui, eget auctor sem erat ac diam. Sed sed sem convallis, ultricies magna quis, eleifend orci. Mauris laoreet ultrices purus.
+        </p>
+    </div>
+
+    if (i < 2)
+    {
+        <div id="frecciaNext_@i" class="frecciaGiuCapitolo" style="display: @display;">
+            <i class="fa fa-chevron-down" onclick="navigaCapitolo(@next)"></i>
+        </div>
+    }
+}

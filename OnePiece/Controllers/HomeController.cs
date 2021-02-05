@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace OnePiece.Controllers
 {
@@ -19,6 +20,7 @@ namespace OnePiece.Controllers
             tipi.Add("rufy.png");
             tipi.Add("zoro.png");
             tipi.Add("sanji.png");
+            tipi.Add("shanks.png");
             var random = new Random();
             int index = random.Next(tipi.Count);
             ViewBag.Tipo = tipi[index];
@@ -39,9 +41,17 @@ namespace OnePiece.Controllers
             return PartialView();
         }
 
-        public ActionResult Carosello()
+        public PartialViewResult MenuSaghe(int sagaID)
         {
-            return View();
+            List<ListItem> saghe = new List<ListItem>();
+            saghe.Add(new ListItem { Text = "Saga di Romance Dawn", Value = 1.ToString() });
+            saghe.Add(new ListItem { Text = "Saga di Orange", Value = 2.ToString() });
+            saghe.Add(new ListItem { Text = "Saga di Shirop", Value = 3.ToString() });
+            saghe.Add(new ListItem { Text = "Saga del Baratie", Value = 4.ToString() });
+            saghe.Add(new ListItem { Text = "Saga di Arlong Park", Value = 5.ToString() });
+            saghe.Add(new ListItem { Text = "Saga di Alabasta", Value = 6.ToString() });
+            ViewBag.SagaID = sagaID;
+            return PartialView(saghe);
         }
 
         public ActionResult Timone()

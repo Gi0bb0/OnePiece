@@ -176,9 +176,10 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\Custom\Oswald-Regular.svg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\QuigleyWiggly.svg" />
+    <Content Include="fonts\Custom\QuigleyWiggly.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\frutto.png" />
@@ -188,18 +189,23 @@
     <Content Include="Images\rogia.png" />
     <Content Include="Images\rufy.png" />
     <Content Include="Images\sfondo.png" />
+    <Content Include="Images\spinner.gif" />
     <Content Include="Images\zoozoo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="fonts\QuigleyWiggly.ttf" />
-    <Content Include="fonts\QuigleyWiggly.eot" />
-    <Content Include="fonts\QuigleyWiggly.woff" />
-    <Content Include="fonts\QuigleyWiggly.woff2" />
+    <Content Include="fonts\Custom\QuigleyWiggly.ttf" />
+    <Content Include="fonts\Custom\QuigleyWiggly.eot" />
+    <Content Include="fonts\Custom\QuigleyWiggly.woff" />
+    <Content Include="fonts\Custom\QuigleyWiggly.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\Custom\Oswald-Regular.eot" />
+    <Content Include="fonts\Custom\Oswald-Regular.ttf" />
+    <Content Include="fonts\Custom\Oswald-Regular.woff" />
+    <Content Include="fonts\Custom\Oswald-Regular.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -229,6 +235,7 @@
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Home\SchedaPersonaggio.cshtml" />
     <Content Include="Views\Home\SchedaFrutto.cshtml" />
+    <Content Include="Views\Home\MenuSaghe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

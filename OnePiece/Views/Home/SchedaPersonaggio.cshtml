@@ -3,8 +3,10 @@
         var numero = "@ViewBag.Numero";
         if (numero == "uno" || numero == "tre") {
             $("#chiudi_" + numero).css("left", "10px");
+            $("#flipPersonaggio_" + numero).css("margin-left", "1vh");
         } else {
             $("#chiudi_" + numero).css("right", "10px");
+            $("#flipPersonaggio_" + numero).css("margin-right", "1vh");
         }
         $("#scheda" + numero).show("bounce", 1500);
     });
@@ -18,54 +20,55 @@
         text-align: center;
         margin-top: 2.5vh;
     }
-        .is-flipped {
-            -webkit-transform: rotateY(-180deg);
-            transform: rotateY(180deg);
+
+    .is-flipped {
+        -webkit-transform: rotateY(-180deg);
+        transform: rotateY(180deg);
+    }
+
+
+    .flipPersonaggio .card {
+        width: 29vh;
+        height: 35vh;
+        -webkit-transform-style: preserve-3d;
+        -webkit-transition: 0.5s;
+        transform-style: preserve-3d;
+        transition: 0.5s;
+        background-color: #fff;
+        border-radius: 0.5vh;
+        border: 3px solid darkred;
+    }
+
+        .flipPersonaggio .card .face {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            z-index: 2;
         }
 
+        .flipPersonaggio .card .front {
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+        }
 
-        .flipPersonaggio .card {
+            .flipPersonaggio .card .front img {
+                width: 29vh;
+                height: 100%;
+            }
+
+        .flipPersonaggio .card .img {
+            position: relative;
             width: 29vh;
             height: 35vh;
-            -webkit-transform-style: preserve-3d;
-            -webkit-transition: 0.5s;
-            transform-style: preserve-3d;
-            transition: 0.5s;
-            background-color: #fff;
-            border-radius: 0.5vh;
-            border: 3px solid darkred;
+            z-index: 1;
+            border: 2px solid #000;
         }
 
-            .flipPersonaggio .card .face {
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
-                z-index: 2;
-            }
-
-            .flipPersonaggio .card .front {
-                position: absolute;
-                width: 100%;
-                z-index: 1;
-            }
-
-                .flipPersonaggio .card .front img {
-                    width: 29vh;
-                    height: 100%;
-                }
-
-            .flipPersonaggio .card .img {
-                position: relative;
-                width: 29vh;
-                height: 35vh;
-                z-index: 1;
-                border: 2px solid #000;
-            }
-
-            .flipPersonaggio .card .back {
-                -webkit-transform: rotateY(-180deg);
-                transform: rotateY(-180deg);
-                position: absolute;
-            }
+        .flipPersonaggio .card .back {
+            -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+            position: absolute;
+        }
 
     flipPersonaggio .inner {
         margin: 0px !important;
@@ -83,11 +86,11 @@
     <i class="fa fa-times" style="font-size: 2.5vh;" onclick="nascondiScheda('@ViewBag.Numero')"></i>
 </div>
 
-<div class="flipPersonaggio" onclick="flippaScheda('@ViewBag.Numero')">
+<div id="flipPersonaggio_@ViewBag.Numero" class="flipPersonaggio" onclick="flippaScheda('@ViewBag.Numero')">
     <div id="card_@ViewBag.Numero" class="card">
         <div class="face front">
             <div class="inner">
-                <img src="~/Images/@ViewBag.Tipo" style="height: 15vh; width: 15vh; cursor: pointer;" />
+                <img src="~/Images/@ViewBag.Tipo" style="height: 17vh; width: auto; cursor: pointer;" />
                 <div style="width: 100%; font-size: 4vh; font-family: Pirate; text-align: center;">Monkey D. Rufy</div>
                 <div style="width: 100%; font-size: 1.2vh; text-align: center; font-weight: bold;">
                     <img src="~/Images/pirata.png" style="height: 2.5vh; width: 3vh;" />
@@ -96,7 +99,7 @@
                 @*<div style="width: 100%; font-size: 1.7vh; text-align: center;" onclick="flipScheda()">Capitano dei Pirati di Cappello di Paglia</div>*@
             </div>
         </div>
-        <div class="face back" onclick="flipScheda()">
+        <div class="face back" onclick="flippaScheda('@ViewBag.Numero')">
             <div class="inner">
             </div>
         </div>

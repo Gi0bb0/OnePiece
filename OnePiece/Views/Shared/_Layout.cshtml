@@ -13,27 +13,43 @@
 
 </head>
 <body>
-    <div class="contenitore" style="position: fixed; top: 0; z-index: 101;">
-        <img src="~/Images/icona.png" style="height: 7vh; margin-top: 1vh; margin-left: 2vh; cursor: pointer; display: block; float: left;" onclick="home()" />
+    @*LOADING*@
+    <div id="loading" style="display: none;">
+        <span class="intermeder"></span>
+        <img src="~/Images/spinner.gif" style="vertical-align: middle;" />
     </div>
 
-    <div class="contenitore" style="position: fixed; width: 100vw; top: 0; z-index: 100; text-align: center; font-weight: bold; font-size: 6vh; line-height: 9vh; font-family: Pirate;">
+    @*ICONA HOME*@
+    <div class="contenitore contenitoreIconaHome" onclick="toggleMenu()">
+        <img src="~/Images/icona.png" class="iconaHome" />
+    </div>
+
+    <div id="contenitoreMenuHome" class="contenitore contenitoreMenuHome">
+        <div class="voceMenuHome">SAGHE</div>
+        <div class="voceMenuHome">PERSONAGGI</div>
+        <div class="voceMenuHome">FAZIONI</div>
+        <div class="voceMenuHome">MITOLOGIA</div>
+        <div class="voceMenuHome" style="border-bottom: 0;">MONDO</div>
+    </div>
+
+    @*TITOLO PAGINA*@
+    <div id="titoloPagina" class="contenitore contenitoreTitoloPagina">
         Saga di Romance Dawn
     </div>
 
     @*SCHEDE DI SINISTRA*@
-    <div id="schedauno" class="contenitore" style="position: fixed; width: 30vh; top: 12vh; left: 2vh; z-index: 100; text-align: center; font-weight: bold; display: none;">
+    <div id="schedauno" class="contenitore contenitoreScheda" style="top: 12vh; left: 0;">
 
     </div>
-    <div id="schedatre" class="contenitore" style="position: fixed; width: 30vh; bottom: 10vh; left: 2vh; z-index: 100; text-align: center; font-weight: bold; display: none;">
+    <div id="schedatre" class="contenitore contenitoreScheda" style="bottom: 10vh; left: 0;">
 
     </div>
 
     @*SCHEDE DI DESTRA*@
-    <div id="schedadue" class="contenitore" style="position: fixed; width: 30vh; top: 12vh; right: 2vh; z-index: 100; text-align: center; font-weight: bold; display: none;">
+    <div id="schedadue" class="contenitore contenitoreScheda" style="top: 12vh; right: 0;">
 
     </div>
-    <div id="schedaquattro" class="contenitore" style="position: fixed; width: 30vh; bottom: 10vh; right: 2vh; z-index: 100; text-align: center; font-weight: bold; display: none;">
+    <div id="schedaquattro" class="contenitore contenitoreScheda" style="bottom: 10vh; right: 0;">
 
     </div>
 
@@ -41,25 +57,77 @@
         @RenderBody()
     </div>
 
-    <div class="contenitore" style="position: fixed; bottom: 0; z-index: 101; height: 5vh; width: 100vw;">
-        <div class="contenitore col-lg-4" style="padding: 0;">
-            <div id="freccia_uno" class="frecciaTrasparente frecciaSu"></div>
-            <div id="capitolo_uno" class="capitolo capitoloScelto" onclick="vaiA('uno')">Capitolo 1</div>
-        </div>
-        <div class="contenitore col-lg-4" style="padding: 0;">
-            <div id="freccia_due" class="frecciaTrasparente"></div>
-            <div id="capitolo_due" class="capitolo" onclick="vaiA('due')">Capitolo 2</div>
-        </div>
-        <div class="contenitore col-lg-4" style="padding: 0;">
-            <div id="freccia_tre" class="frecciaTrasparente"></div>
-            <div id="capitolo_tre" class="capitolo" onclick="vaiA('tre')">Capitolo 3</div>
-        </div>
+    @*FOOTER CON MENU*@
+    <div id="contenitoreMenuFooter" class="contenitore contenitoreMenuFooter">
+        
     </div>
 </body>
 </html>
 
 <script>
-    function home() {
-        window.location.href = "../Home";
+    var schedaUno = false;
+    var schedaDue = false;
+    var schedaTre = false;
+    var schedaQuattro = false;
+    var ordineApparizione = [];
+
+    function toggleMenu() {
+        if ($("#contenitoreMenuHome").is(":visible")) {
+            $("#contenitoreMenuHome").hide("drop", { direction: "left" }, 400);
+        } else {
+            nascondiSchedeTutte();
+            $("#contenitoreMenuHome").show("drop", 400);
+        }
+    }
+
+    function nascondiSchedeTutte() {
+        var direzione = "";
+        var num = 0;
+        var index = -1;
+        if (schedaUno) {
+            $("#schedauno").hide("slide", { direction: "left" }, 800);
+            schedaUno = false;
+            index = ordineApparizione.indexOf(1);
+            if (index > -1) {
+                ordineApparizione.splice(index, 1);
+            }
+            index = -1;
+        }
+        if (schedaDue) {
+            $("#schedadue").hide("slide", { direction: "right" }, 800);
+            schedaUno = false;
+            index = ordineApparizione.indexOf(2);
+            if (index > -1) {
+                ordineApparizione.splice(index, 1);
+            }
+            index = -1;
+        }
+        if (schedaTre) {
+            $("#schedatre").hide("slide", { direction: "left" }, 800);
+            schedaUno = false;
+            index = ordineApparizione.indexOf(3);
+            if (index > -1) {
+                ordineApparizione.splice(index, 1);
+            }
+            index = -1;
+        }
+        if (schedaQuattro) {
+            $("#schedaquattro").hide("slide", { direction: "right" }, 800);
+            schedaUno = false;
+            index = ordineApparizione.indexOf(4);
+            if (index > -1) {
+                ordineApparizione.splice(index, 1);
+            }
+            index = -1;
+        }
+
+    }
+
+    function nascondiMenu() {
+        $("#contenitoreMenuHome").hide("slide", { direction: "left" }, 800);
+    }
+
+    function toggleLoading() {
+        $("#loading").toggle();
     }
 </script>

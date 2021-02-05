@@ -7,13 +7,25 @@
 
 @font-face {
     font-family: 'Pirate';
-    src: url('../fonts/QuigleyWiggly.ttf'); /* IE9 Compat Modes */
-    src: url('../fonts/QuigleyWiggly.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../fonts/QuigleyWiggly.woff2') format('woff2'), /* Super Modern Browsers */
-    url('../fonts/QuigleyWiggly.woff') format('woff'), /* Pretty Modern Browsers */
-    url('../fonts/QuigleyWiggly.ttf') format('truetype'), /* Safari, Android, iOS */
-    url('../fonts/QuigleyWiggly.svg#svgFontName') format('svg'); /* Legacy iOS */
+    src: url('../fonts/Custom/QuigleyWiggly.ttf'); /* IE9 Compat Modes */
+    src: url('../fonts/Custom/QuigleyWiggly.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Custom/QuigleyWiggly.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../fonts/Custom/QuigleyWiggly.woff') format('woff'), /* Pretty Modern Browsers */
+    url('../fonts/Custom/QuigleyWiggly.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Custom/QuigleyWiggly.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
+
+@font-face {
+    font-family: 'Oswald';
+    src: url('../fonts/Custom/Oswald-Regular.ttf'); /* IE9 Compat Modes */
+    src: url('../fonts/Custom/Oswald-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Custom/Oswald-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../fonts/Custom/Oswald-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+    url('../fonts/Custom/Oswald-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Custom/Oswald-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -22,44 +34,97 @@
     height: 85vh;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
 .contenitore {
     overflow: hidden;
 }
 
-.capitolo {
-    height: 4vh;
-    background-color: #AD4C4C;
+#loading {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     text-align: center;
-    line-height: 4vh;
-    font-size: 2vh;
-    color: white;
+    opacity: 0.8;
+    z-index: 99;
+}
+
+.intermeder {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.contenitoreIconaHome {
+    position: fixed;
+    top: 0;
+    z-index: 101;
+}
+
+.iconaHome {
+    height: 7vh;
+    margin-top: 1vh;
+    margin-left: 2vh;
     cursor: pointer;
+    display: block;
+    float: left;
 }
 
-    .capitolo:hover {
-        text-decoration: underline;
-    }
-
-.capitoloScelto {
-    background-color: darkred !important;
+.contenitoreMenuHome {
+    position: fixed;
+    width: 30vh;
+    height: 40vh;
+    border-radius: 0.8vh;
+    border: 5px solid #4286C5;
+    background-color: white;
+    z-index: 100;
+    top: 1vh;
+    left: 10vh;
+    display: none;
+    text-align: center;
+    -webkit-box-shadow: 10px 10px 10px 0px rgba(44,89,128,0.6);
+    -moz-box-shadow: 10px 10px 10px 0px rgba(44,89,128,0.6);
+    box-shadow: 10px 10px 10px 0px rgba(44,89,128,0.6);
 }
 
-.frecciaTrasparente {
-    width: 0;
-    height: 0;
-    margin-left: 48%;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 10px solid transparent;
+.voceMenuHome {
+    text-align: center;
+    width: 25vh;
+    height: 7.5vh;
+    font-family: Oswald;
+    font-weight: bold;
+    font-size: 3vh;
+    line-height: 7vh;
+    border-bottom: 1px solid #4286C5;
+    margin-left: 2vh;
 }
 
-.frecciaSu {
-    border-bottom: 10px solid darkred !important;
+.contenitoreTitoloPagina {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    z-index: 99;
+    text-align: center;
+    font-weight: bold;
+    font-size: 6vh;
+    line-height: 9vh;
+    font-family: Oswald;
+}
+
+.contenitoreScheda {
+    position: fixed;
+    width: 30vh;
+    z-index: 100;
+    text-align: center;
+    font-weight: bold;
+    display: none;
+}
+
+.contenitoreMenuFooter {
+    position: fixed;
+    bottom: 0;
+    z-index: 98;
+    height: 5vh;
+    width: 100vw;
 }

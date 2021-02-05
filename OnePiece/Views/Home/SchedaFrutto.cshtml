@@ -3,8 +3,10 @@
         var numero = "@ViewBag.Numero";
         if (numero == "uno" || numero == "tre") {
             $("#chiudi_" + numero).css("left", "10px");
+            $("#flipFrutto_" + numero).css("margin-left", "1vh");
         } else {
             $("#chiudi_" + numero).css("right", "10px");
+            $("#flipFrutto_" + numero).css("margin-right", "1vh");
         }
         $("#scheda" + numero).show("bounce", 1500);
     });
@@ -84,22 +86,21 @@
     <i class="fa fa-times" style="font-size: 2.5vh;" onclick="nascondiScheda('@ViewBag.Numero')"></i>
 </div>
 
-<div class="flipFrutto" onclick="flippaScheda('@ViewBag.Numero')">
+<div id="flipFrutto_@ViewBag.Numero" class="flipFrutto" onclick="flippaScheda('@ViewBag.Numero')">
     <div id="card_@ViewBag.Numero" class="card">
         <div class="face front">
             <div class="inner">
-                <img src="~/Images/@ViewBag.Tipo" style="height: 15vh; width: 15vh;" />
+                <img src="~/Images/@ViewBag.Tipo" style="height: 17vh; width: auto;" />
                 <div style="width: 100%; font-size: 4vh; font-family: Pirate; text-align: center;">Foco Foco</div>
                 <div style="width: 100%; font-size: 1.2vh; text-align: center; font-weight: bold;">
                     <img src="~/Images/frutto.png" style="height: 2.5vh; width: 2.5vh; margin-top: -10px;" />
                     <span style="padding-left: 3px;">FRUTTO DEL DIAVOLO</span>
                 </div>
-                @*<div style="width: 100%; font-size: 1.7vh; text-align: center;">Tipo: ROGIA</div>*@
             </div>
         </div>
-        <div class="face back">
+        <div class="face back" onclick="flippaScheda('@ViewBag.Numero')">
             <div class="inner">
-                Retro card
+
             </div>
         </div>
     </div>

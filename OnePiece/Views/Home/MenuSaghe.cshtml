@@ -1,0 +1,137 @@
+﻿@model List<System.Web.UI.WebControls.ListItem>
+
+@{
+    int sagaID = ViewBag.SagaID;
+    int index = 0;
+}
+
+<script>
+    var primaVisualizzata = 0;
+    var ultimaVisualizzata = primaVisualizzata + 2;
+
+    function avantiTest() {
+        $("#contenitoreSaghe").animate({ scrollLeft: $('#contenitoreSaga_' + ultimaVisualizzata).offset().left }, 1000);
+    }
+
+    function avantiSaghe() {
+        ultimaVisualizzata++;
+        $("#contenitoreSaga_" + primaVisualizzata).hide();
+        $("#contenitoreSaga_" + ultimaVisualizzata).show();
+        primaVisualizzata++;
+        if (primaVisualizzata > 0) {
+            $("#frecciaSagaPrev").show();
+        }
+        if (ultimaVisualizzata >= 5) {
+            $("#frecciaSagaNext").hide();
+        }
+    }
+
+    function indietroSaghe() {
+        primaVisualizzata--;
+        $("#contenitoreSaga_" + ultimaVisualizzata).hide();
+        $("#contenitoreSaga_" + primaVisualizzata).show();
+        ultimaVisualizzata--;
+        if (primaVisualizzata == 0) {
+            $("#frecciaSagaPrev").hide();
+        }
+        if (ultimaVisualizzata < 5) {
+            $("#frecciaSagaNext").show();
+        }
+    }
+</script>
+
+<style>
+    .contenitoreSaga {
+        height: 100%;
+        width: 33.3vw;
+        float: left;
+        position: relative;
+    }
+
+    .capitolo {
+        height: 4vh;
+        background-color: #AD4C4C;
+        text-align: center;
+        line-height: 4vh;
+        font-size: 2vh;
+        color: white;
+        font-family: Oswald;
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+    }
+
+        .capitolo span {
+            cursor: pointer;
+        }
+
+            .capitolo span:hover {
+                text-decoration: underline;
+            }
+
+    .capitoloScelto {
+        background-color: darkred !important;
+    }
+
+    .frecciaTrasparente {
+        width: 0;
+        height: 0;
+        margin-left: 48%;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-bottom: 10px solid transparent;
+    }
+
+    .frecciaSu {
+        border-bottom: 10px solid darkred !important;
+    }
+</style>
+
+<i id="frecciaSagaPrev" class="fa fa-chevron-left" style="position: absolute; left: 2vh; top: 2.5vh; z-index: 1; color: white; cursor: pointer; display: none;" onclick="indietroSaghe()"></i>
+
+@*@foreach (var saga in Model)
+    {
+        string capitolo = "";
+        string freccia = "";
+        string display = "block";
+        if (saga.Value == sagaID.ToString())
+        {
+            capitolo = "capitoloScelto";
+            freccia = "frecciaSu";
+        }
+        if (Convert.ToInt32(saga.Value) > 3)
+        {
+            display = "none";
+        }
+        <div id="contenitoreSaga_@index" class="contenitore col-lg-4" style="padding: 0; display: @display;">
+            <div id="freccia_@saga.Value" class="frecciaTrasparente @freccia"></div>
+            <div id="capitolo_@saga.Value" class="capitolo @capitolo" onclick="caricaSaga('@saga.Value')">
+                <span>@saga.Text</span>
+            </div>
+        </div>
+
+        index++;
+    }*@
+
+<div id="contenitoreSaghe" class="contenitore" style="height: 100%; width: 200vw; overflow-x: auto;">
+    @foreach (var saga in Model)
+    {
+        string capitolo = "";
+        string freccia = "";
+        if (saga.Value == sagaID.ToString())
+        {
+            capitolo = "capitoloScelto";
+            freccia = "frecciaSu";
+        }
+
+        <div id="contenitoreSaga_@index" class="contenitore contenitoreSaga left" style="padding: 0;">
+            <div id="freccia_@saga.Value" class="frecciaTrasparente @freccia"></div>
+            <div id="capitolo_@saga.Value" class="capitolo @capitolo" onclick="caricaSaga('@saga.Value')">
+                <span>@saga.Text</span>
+            </div>
+        </div>
+
+        index++;
+    }
+</div>
+
+<i id="frecciaSagaNext" class="fa fa-chevron-right" style="position: absolute; right: 2vh; top: 2.5vh; color: white; cursor: pointer;" onclick="avantiTest()"></i>
